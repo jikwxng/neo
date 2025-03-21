@@ -62,10 +62,10 @@ app.post('/meal', async (req, res) => {
      data = {
       'version': '2.0',
       data: {
-        a: "xptmxm"
+        "moin": "xptmxm"
       }
     }
-  res.json(data);
+  res.status(200).json(data);
 });
 
 app.listen(3000, () => console.log('node on 3000'));
