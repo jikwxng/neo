@@ -34,7 +34,7 @@ app.post('/message', async (req, res) => {
               {
                 "title": "",
                 "link": {},
-                "description": chatID.chatId
+                "description": '메시지를 보내 대화를 시작하세요.'
               }
             ]
           }
