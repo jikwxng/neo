@@ -18,31 +18,25 @@ app.post('/message', async (req, res) => {
     const chatID = await getChatId()
 
     userDatas[reqData.user.id] = chatID.chatId
-    data = {
-  "version": "2.0",
-  "template": {
-    "outputs": [{
-      "simpleText": {
-        "text": "➕ 새 채팅이 생성되었습니다."
-      },
-      "buttons": [
-        {
-          "action": "message",
-          "label": "채팅 시작",
-          "messageText": "채팅을 시작합니다."
-        }
-      ]
-    }]
-  }
-}
+    console.log(chatID.chatId)
 
+    data = {
+      'version': '2.0',
+      'template': {
+	    'outputs': [{
+	      'simpleText': {
+	        'text': "➕ 새 채팅이 생성되었습니다."
+	      }
+	    }],
+      }
+    }
   } else {
     if (!userDatas[reqData.user.id]) {
       const chatID = await getChatId()
 
       userDatas[reqData.user.id] = chatID.chatId
     }
-	console.log(userDatas[reqData.user.id])
+
     const message = await getMessage({ chatId:  userDatas[reqData.user.id], message: question,  })
 
      data = {
@@ -61,6 +55,14 @@ app.post('/message', async (req, res) => {
       }
     }
   }
+  res.json(data);
+});
+
+app.post('/meal', async (req, res) => {
+     data = {
+      'version': '2.0',
+      a: "테스트"
+    }
   res.json(data);
 });
 
