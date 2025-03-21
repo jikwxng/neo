@@ -10,12 +10,15 @@ app.get('/keyboard', (req, res) => {
 });
 
 app.post('/message', (req, res) => {
+	let data = {}
 	console.log(0)
   const question = req.body.userRequest.utterance;
   const goMain = '처음으로';
+
+	console.log(question)
   
   if (question === '테스트') {
-    const data = {
+     data = {
       'version': '2.0',
       'template': {
 	    'outputs': [{
