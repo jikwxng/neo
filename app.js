@@ -17,7 +17,6 @@ app.post('/message', (req, res) => {
 
 	console.log(question)
   
-  if (question === '테스트') {
      data = {
       'version': '2.0',
       'template': {
@@ -33,7 +32,6 @@ app.post('/message', (req, res) => {
 	    }]
       }
     }
-  }
   res.json(data);
 });
 
