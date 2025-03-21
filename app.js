@@ -13,6 +13,7 @@ app.post('/message', (req, res) => {
 	let data = {}
 	console.log(0)
   const question = req.body.userRequest.utterance;
+	console.log(req.body.userRequest)
   const goMain = '새 채팅';
 
 	console.log(question)
