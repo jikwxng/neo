@@ -70,7 +70,7 @@ app.post('/meal', async (req, res) => {
            {
              "listCard": {
                "header": {
-                 "title": (today.getMonth + 1) + "월 " + today.getDate() + "일 (" + ["일","월","화","수","목","금","토"][today.getDay] + ") 중식",
+                 "title": (today.getMonth() + 1) + "월 " + today.getDate() + "일 (" + ["일","월","화","수","목","금","토"][today.getDay()] + ") 중식",
                  "link": {
                    "web": ""
                  }
@@ -82,7 +82,28 @@ app.post('/meal', async (req, res) => {
                      "web": ""
                    },
                    "description": "10,39,33,45,2,3"
-                 }
+                 },
+                 {
+                  "title": "삼치데리야끼구이",
+                  "link": {
+                    "web": ""
+                  },
+                  "description": "10,39,33,45,2,3"
+                },
+                {
+                  "title": "삼치데리야끼구이",
+                  "link": {
+                    "web": ""
+                  },
+                  "description": "10,39,33,45,2,3"
+                },
+                {
+                  "title": "삼치데리야끼구이",
+                  "link": {
+                    "web": ""
+                  },
+                  "description": "10,39,33,45,2,3"
+                }
                ],
                "buttons": [],
                "lock": false,
