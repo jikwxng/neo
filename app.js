@@ -34,7 +34,7 @@ app.post('/message', async (req, res) => {
 
       userDatas[reqData.user.id] = chatID.chatId
     }
-
+	console.log(userDatas[reqData.user.id])
     const message = await getMessage({ chatId:  userDatas[reqData.user.id], message: question,  })
 
      data = {
