@@ -12,7 +12,6 @@ app.post('/message', async (req, res) => {
 	let data = {}
   const reqData = req.body.userRequest
   const question = reqData.utterance;
-  const goMain = '새 채팅';
 
   if (question == "새 채팅") {
     const chatID = await getChatId()
@@ -39,6 +38,8 @@ app.post('/message', async (req, res) => {
 
     const message = await getMessage({ chatId:  userDatas[reqData.user.id], message: question,  })
 
+    const keywords = JSON.parse(message.split("keyword: ")[1])
+
      data = {
       'version': '2.0',
       'template': {
@@ -48,9 +49,28 @@ app.post('/message', async (req, res) => {
 	      }
 	    }],
 	    'quickReplies': [{
-	      'label': goMain,
+	      'label': keywords[0],
 	      'action': 'message',
-	      'messageText': goMain
+	      'messageText': keywords[0]
+	    },
+      {
+	      'label': keywords[1],
+	      'action': 'message',
+	      'messageText': keywords[1]
+	    },
+      {
+	      'label': keywords[2],
+	      'action': 'message',
+	      'messageText': keywords[2]
+	    },
+      {
+	      'label': keywords[3],
+	      'action': 'message',
+	      'messageText': keywords[3]
+	    },{
+	      'label': "새 채팅",
+	      'action': 'message',
+	      'messageText': "새 채팅"
 	    }]
       }
     }
@@ -72,38 +92,35 @@ app.post('/meal', async (req, res) => {
                "header": {
                  "title": (today.getMonth() + 1) + "월 " + today.getDate() + "일 (" + ["일","월","화","수","목","금","토"][today.getDay()] + ") 중식",
                  "link": {
-                   "web": ""
+                   
                  }
                },
                "items": [
                  {
                    "title": "삼치데리야끼구이",
                    "link": {
-                     "web": ""
+                     
                    },
                    "description": "10,39,33,45,2,3"
                  },
                  {
                   "title": "삼치데리야끼구이",
                   "link": {
-                    "web": ""
+                    
                   },
                   "description": "10,39,33,45,2,3"
                 },
                 {
                   "title": "삼치데리야끼구이",
                   "link": {
-                    "web": ""
+                    
                   },
                   "description": "10,39,33,45,2,3"
                 },
                 {
-                  "title": "삼치데리야끼구이",
-                  "link": {
-                    "web": ""
-                  },
-                  "description": "10,39,33,45,2,3"
-                }
+                   "title": "삼치데리야끼구이",
+                   "description": "10,39,33,45,2,3"
+                 }
                ],
                "buttons": [],
                "lock": false,
