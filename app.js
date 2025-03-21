@@ -61,7 +61,9 @@ app.post('/message', async (req, res) => {
 app.post('/meal', async (req, res) => {
      data = {
       'version': '2.0',
-      a: "테스트"
+      data: {
+        a: "xptmxm"
+      }
     }
   res.json(data);
 });
