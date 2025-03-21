@@ -38,7 +38,7 @@ app.post('/message', async (req, res) => {
 
     const message = await getMessage({ chatId:  userDatas[reqData.user.id], message: question,  })
 
-    const keywords = JSON.parse(message.split("keyword: ")[1])
+    const keywords = JSON.parse(message.response.split("keyword: ")[1])
 
      data = {
       'version': '2.0',
