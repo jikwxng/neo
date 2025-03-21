@@ -19,15 +19,23 @@ app.post('/message', async (req, res) => {
 
     userDatas[reqData.user.id] = chatID.chatId
     data = {
-      'version': '2.0',
-      'template': {
-	    'outputs': [{
-	      'simpleText': {
-	        'text': "➕ 새 채팅이 생성되었습니다."
-	      }
-	    }],
-      }
-    }
+  "version": "2.0",
+  "template": {
+    "outputs": [{
+      "simpleText": {
+        "text": "➕ 새 채팅이 생성되었습니다."
+      },
+      "buttons": [
+        {
+          "action": "message",
+          "label": "채팅 시작",
+          "messageText": "채팅을 시작합니다."
+        }
+      ]
+    }]
+  }
+}
+
   } else {
     if (!userDatas[reqData.user.id]) {
       const chatID = await getChatId()
