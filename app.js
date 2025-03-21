@@ -28,19 +28,16 @@ app.post('/message', async (req, res) => {
           "listCard": {
             "header": {
               "title": "새 대화가 시작되었습니다.",
-              "link": {
-
+              "link": {}
+            },
+            "items": [
+              {
+                "title": "",
+                "link": {},
+                "description": chatID.chatId
               }
-            }
-          },
-          "items": [
-            {
-              "title": "",
-              "link": {
-                
-              },
-              "description": chatID.chatId
-            }],
+            ]
+          }
         }]
       }
     }
