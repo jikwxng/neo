@@ -89,7 +89,7 @@ async function getMessage({
 
         const data = {
             app_id: 'xVzbkFgdtw',
-            chat_id: chatId.chatId,
+            chat_id: chatId,
             user_message: message
         };
         const res = await axios.post(url, data, {
