@@ -45,7 +45,7 @@ app.post('/message', async (req, res) => {
       'template': {
 	    'outputs': [{
 	      'simpleText': {
-	        'text': message.response
+	        'text': message.response.split("keyword: ")[0]
 	      }
 	    }],
 	    'quickReplies': [{
