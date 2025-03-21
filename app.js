@@ -10,6 +10,7 @@ app.get('/keyboard', (req, res) => {
 });
 
 app.post('/message', (req, res) => {
+	console.log(0)
   const question = req.body.userRequest.utterance;
   const goMain = '처음으로';
   
