@@ -13,7 +13,7 @@ app.post('/message', (req, res) => {
 	let data = {}
 	console.log(0)
   const question = req.body.userRequest.utterance;
-  const goMain = '처음으로';
+  const goMain = '새 채팅';
 
 	console.log(question)
   
@@ -22,7 +22,7 @@ app.post('/message', (req, res) => {
       'template': {
 	    'outputs': [{
 	      'simpleText': {
-	        'text': '테스트'
+	        'text': question
 	      }
 	    }],
 	    'quickReplies': [{
