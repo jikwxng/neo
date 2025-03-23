@@ -15,6 +15,8 @@ app.post('/message', async (req, res) => {
   const reqData = req.body.userRequest
   const question = reqData.utterance;
 
+  console.log("\n\n"+question+"\n\n")
+
   if (question == "새 채팅") {
     const chatID = await getChatId()
 
