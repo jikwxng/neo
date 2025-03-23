@@ -49,9 +49,12 @@ app.post('/message', async (req, res) => {
 
     const response = message.response
 
-    const keywords = JSON.parse(message.split("keyword: ")[1].split("option")[0])
-    const options = JSON.parse(message.split("option: ")[1])
-    const content = message.split("keyword: ")[0].trim()
+    const keywords = JSON.parse(response.split("keyword: ")[1].split("option")[0])
+    const options = JSON.parse(response.split("option: ")[1])
+    const content = response.split("keyword: ")[0].trim()
+
+    console.log(keywords,options,content)
+    console.log(chatID)
 
     if (!options) {
 
