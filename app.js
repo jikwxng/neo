@@ -157,8 +157,7 @@ app.post('/message', async (req, res) => {
     }
   };
 }
-    console.log('data: '+data)
-
+    console.log('data: '+JSON.stringify(data, null, 4))
     res.json(data)
 });
 
