@@ -11,6 +11,7 @@ const axios = require("axios")
 let userDatas = {}
 
 app.post('/message', async (req, res) => {
+  try {
   let data = {}
   const reqData = req.body.userRequest
   const question = reqData.utterance;
@@ -56,7 +57,7 @@ app.post('/message', async (req, res) => {
 
     console.log("response:: "+response)
 
-    const keywords = JSON.parse(response.split("keyword: ")[1]?.split("],")[0])
+    const keywords = JSON.parse(response.split("keyword: ")[1]?.split("],")[0]+"]")
     const options = response.split("option: ")[1] ? JSON.parse(response.split("option: ")[1]) : null
     const content = response.split("keyword: ")[0]?.trim()
 
@@ -136,32 +137,26 @@ app.post('/message', async (req, res) => {
       }
     }
   }
-
-  process.addListener("uncaughtException", err => {
-    console.error("오류 발생!: " + err);
-    
-    data = {
-      "version": "2.0",
-      "template": {
-        "outputs": [{
-          "listCard": {
-            "header": {
-              "title": "예상치 못한 오류가 발생했습니다.",
-              "link": {}
-            },
-            "items": [{
-              "title": "오류 내용",
-              "link": {},
-              "description": err.toString()
-            }]
-          }
-        }]
-      }
-    };
-    res.json(data)
-  });
-  
-
+} catch(err) {
+  data = {
+    "version": "2.0",
+    "template": {
+      "outputs": [{
+        "listCard": {
+          "header": {
+            "title": "예상치 못한 오류가 발생했습니다.",
+            "link": {}
+          },
+          "items": [{
+            "title": "오류 내용",
+            "link": {},
+            "description": err
+          }]
+        }
+      }]
+    }
+  };
+}
     console.log('data: '+data)
 
     res.json(data)
