@@ -135,29 +135,29 @@ app.post('/message', async (req, res) => {
         }
       }
     }
-
-    process.addListener("uncaughtException", err => {
-      console.error(err)
-      data = {
-        "version": "2.0",
-        "template": {
-          "outputs": [{
-            "listCard": {
-              "header": {
-                "title": "예상치 못한 오류가 발생했습니다.",
-                "link": {}
-              },
-              "items": [{
-                "title": "",
-                "link": {},
-                "description": err
-              }]
-            }
-          }]
-        }
-      }
-    })
   }
+
+  process.addListener("uncaughtException", err => {
+    console.error("오류 발생!: "+err)
+    data = {
+      "version": "2.0",
+      "template": {
+        "outputs": [{
+          "listCard": {
+            "header": {
+              "title": "예상치 못한 오류가 발생했습니다.",
+              "link": {}
+            },
+            "items": [{
+              "title": "",
+              "link": {},
+              "description": err
+            }]
+          }
+        }]
+      }
+    }
+  })
 
     console.log('data: '+data)
 
