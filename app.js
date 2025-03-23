@@ -138,7 +138,8 @@ app.post('/message', async (req, res) => {
   }
 
   process.addListener("uncaughtException", err => {
-    console.error("오류 발생!: "+err)
+    console.error("오류 발생!: " + err);
+    
     data = {
       "version": "2.0",
       "template": {
@@ -149,15 +150,16 @@ app.post('/message', async (req, res) => {
               "link": {}
             },
             "items": [{
-              "title": "",
+              "title": "오류 내용",
               "link": {},
-              "description": err
+              "description": err.toString()
             }]
           }
         }]
       }
-    }
-  })
+    };
+  });
+  
 
     console.log('data: '+data)
 
