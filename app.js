@@ -157,11 +157,11 @@ app.post('/message', async (req, res) => {
         }
       }
     })
+  }
 
     console.log('data: '+data)
 
-    res.json(data);
-  }
+    res.json(data)
 });
 
 app.listen(3000, () => console.log('node on 3000'));
