@@ -59,7 +59,7 @@ app.post('/message', async (req, res) => {
 
       const keywords = response.split("keyword: [")[1]?.replace("]", "").split(",");
       const options = response.includes("option: [") ? response.split("option: [")[1].split("]")[0].split(",") : null
-      const content = response.split("keyword: ")[0]?.trim()
+      const content = response.split("keyword: ")[0]?.trim().replaceAll("[홈페이지]", "https://syhs-h.goeujb.kr/syhs-h/main.do")
 
       console.log("keywords: " + keywords, "options: " + options, "content: " + content)
       console.log("chatID: " + userDatas[reqData.user.id])
