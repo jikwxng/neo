@@ -44,9 +44,12 @@ app.post('/message', async (req, res) => {
       userDatas[reqData.user.id] = chatID.chatId
     }
 
+     const now = new Date();
+     const today = now.toISOString().slice(0, 10).replace(/-/g, "") + " " + now.toTimeString().slice(0, 5);
+
     const message = await getMessage({
       chatId: userDatas[reqData.user.id],
-      message: question,
+      message: "["+today+"]\n"+question,
     })
 
     const response = message.response
@@ -133,6 +136,25 @@ app.post('/message', async (req, res) => {
       }
     }
     console.log('data: '+data)
+
+    process.addListener("uncaughtException", err => {
+      data = {
+        "version": "2.0",
+        "template": {
+          "outputs": [{
+            "listCard": {
+              "header": {
+                "title": "예상치 못한 오류가 발생했습니다.",
+                "link": {}
+              },
+              "items": []
+            }
+          }]
+        }
+      }
+    })
+
+
     res.json(data);
   }
 });
