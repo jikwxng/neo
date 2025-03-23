@@ -30,11 +30,7 @@ app.post('/message', async (req, res) => {
               "title": "새 대화가 시작되었습니다.",
               "link": {}
             },
-            "items": [{
-              "title": "메시지를 보내 대화를 시작하세요.",
-              "link": {},
-              "description": ''
-            }]
+            "items": []
           }
         }]
       }
@@ -49,7 +45,9 @@ app.post('/message', async (req, res) => {
     const message = await getMessage({
       chatId: userDatas[reqData.user.id],
       message: question,
-    }).response
+    })
+
+    const response = message.response
 
     const keywords = JSON.parse(message.split("keyword: ")[1].split("option")[0])
     const options = JSON.parse(message.split("option: ")[1])
