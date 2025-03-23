@@ -9,15 +9,13 @@ app.use(express.json());
 const axios = require("axios")
 
 let userDatas = {}
-
+let data = {}
 app.post('/message', async (req, res) => {
   try {
     const reqData = req.body.userRequest
     const question = reqData.utterance
 
     console.log("\n\n" + question + "\n\n")
-
-    let data = {} // Initialize the data variable here to avoid repetition
 
     if (question === "새 채팅") {
       const chatID = await getChatId()
@@ -39,6 +37,7 @@ app.post('/message', async (req, res) => {
           }]
         }
       }
+
     } else {
       if (!userDatas[reqData.user.id]) {
         const chatID = await getChatId()
