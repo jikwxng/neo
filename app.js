@@ -30,13 +30,11 @@ app.post('/message', async (req, res) => {
               "title": "새 대화가 시작되었습니다.",
               "link": {}
             },
-            "items": [
-              {
-                "title": "",
-                "link": {},
-                "description": '메시지를 보내 대화를 시작하세요.'
-              }
-            ]
+            "items": [{
+              "title": "메시지를 보내 대화를 시작하세요.",
+              "link": {},
+              "description": ''
+            }]
           }
         }]
       }
@@ -51,42 +49,86 @@ app.post('/message', async (req, res) => {
     const message = await getMessage({
       chatId: userDatas[reqData.user.id],
       message: question,
-    })
+    }).response
 
-    const keywords = JSON.parse(message.response.split("keyword: ")[1])
+    const keywords = JSON.parse(message.split("keyword: ")[1].split("option")[0])
+    const options = JSON.parse(message.split("option: ")[1])
+    const content = message.split("keyword: ")[0].trim()
 
-    data = {
-      'version': '2.0',
-      'template': {
-        'outputs': [{
-          'simpleText': {
-            'text': message.response.split("keyword: ")[0].trim()
-          }
-        }],
-        'quickReplies': [{
-            'label': keywords[0],
-            'action': 'message',
-            'messageText': keywords[0]
-          },
-          {
-            'label': keywords[1],
-            'action': 'message',
-            'messageText': keywords[1]
-          },
-          {
-            'label': keywords[2],
-            'action': 'message',
-            'messageText': keywords[2]
-          }, {
-            'label': "새 채팅",
-            'action': 'message',
-            'messageText': "새 채팅"
-          }
-        ]
+    if (!options) {
+
+      data = {
+        'version': '2.0',
+        'template': {
+          'outputs': [{
+            'simpleText': {
+              'text': content
+            }
+          }],
+          'quickReplies': [{
+              'label': keywords[0],
+              'action': 'message',
+              'messageText': keywords[0]
+            },
+            {
+              'label': keywords[1],
+              'action': 'message',
+              'messageText': keywords[1]
+            },
+            {
+              'label': keywords[2],
+              'action': 'message',
+              'messageText': keywords[2]
+            }, {
+              'label': "새 채팅",
+              'action': 'message',
+              'messageText': "새 채팅"
+            }
+          ]
+        }
+      }
+    } else {
+      data = {
+        'version': '2.0',
+        'template': {
+          'outputs': [{
+            "listCard": {
+              "header": {
+                "title": "아직 구현중인 기능입니다.",
+                "link": {}
+              },
+              "items": [{
+                "title": options[0] + " 정보 제공",
+                "link": {},
+                "description": ''
+              }]
+            }
+          }],
+          'quickReplies': [{
+              'label': keywords[0],
+              'action': 'message',
+              'messageText': keywords[0]
+            },
+            {
+              'label': keywords[1],
+              'action': 'message',
+              'messageText': keywords[1]
+            },
+            {
+              'label': keywords[2],
+              'action': 'message',
+              'messageText': keywords[2]
+            }, {
+              'label': "새 채팅",
+              'action': 'message',
+              'messageText': "새 채팅"
+            }
+          ]
+        }
       }
     }
+    res.json(data);
   }
-  res.json(data);
 });
 
 app.listen(3000, () => console.log('node on 3000'));
