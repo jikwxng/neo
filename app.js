@@ -138,6 +138,7 @@ app.post('/message', async (req, res) => {
     }
   }
 } catch(err) {
+  console.error(err)
   data = {
     "version": "2.0",
     "template": {
@@ -150,7 +151,7 @@ app.post('/message', async (req, res) => {
           "items": [{
             "title": "오류 내용",
             "link": {},
-            "description": err
+            "description": err.toString()
           }]
         }
       }]
