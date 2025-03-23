@@ -55,9 +55,9 @@ app.post('/message', async (req, res) => {
 
       const response = message.response
 
-      console.log("response:: " + response)
+      console.log("response: " + response)
 
-      const keywords = response.split("keyword: [")[1]?.split("],")[0].split(",")
+      const keywords = response.split("keyword: [")[1]?.replace("]", "").split(",");
       const options = response.includes("option: [") ? response.split("option: [")[1].split("]")[0].split(",") : null
       const content = response.split("keyword: ")[0]?.trim()
 
