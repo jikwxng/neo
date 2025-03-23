@@ -56,7 +56,7 @@ app.post('/message', async (req, res) => {
     const content = response.split("keyword: ")[0]?.trim()
 
     console.log("keywords: "+keywords,"options: "+options,"content: "+content)
-    console.log("chatID: "+chatID)
+    console.log("chatID: "+userDatas[reqData.user.id])
 
     if (!options) {
 
@@ -130,6 +130,7 @@ app.post('/message', async (req, res) => {
         }
       }
     }
+    console.log('data: '+data)
     res.json(data);
   }
 });
