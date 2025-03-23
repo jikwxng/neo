@@ -19,7 +19,7 @@ app.post('/message', async (req, res) => {
     const chatID = await getChatId()
 
     userDatas[reqData.user.id] = chatID.chatId
-    console.log(chatID.chatId)
+    console.log("새 채팅: "+chatID.chatId)
 
     data = {
       "version": "2.0",
@@ -52,7 +52,7 @@ app.post('/message', async (req, res) => {
     console.log("response:: "+response)
 
     const keywords = JSON.parse(response.split("keyword: ")[1]?.split("option")[0])
-    const options = response.split("option: ")[1] ? JSON.parse(response.split("option: ")[1]) : []
+    const options = response.split("option: ")[1] ? JSON.parse(response.split("option: ")[1]) : null
     const content = response.split("keyword: ")[0]?.trim()
 
     console.log("keywords: "+keywords,"options: "+options,"content: "+content)
