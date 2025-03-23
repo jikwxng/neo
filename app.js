@@ -32,7 +32,7 @@ app.post('/message', async (req, res) => {
                 "title": "새 대화가 시작되었습니다.",
                 "link": {}
               },
-              "items": []
+              "items": [{}]
             }
           }]
         }
