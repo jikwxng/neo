@@ -131,7 +131,12 @@ app.post('/message', async (req, res) => {
               "description": err.toString()
             }]
           }
-        }]
+        }],
+        'quickReplies': {
+          'label': "재시도",
+          'action': 'message',
+          'messageText': question
+        }
       }
     }
   }
