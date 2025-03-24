@@ -92,45 +92,33 @@ app.post('/message', async (req, resS) => {
         resS.json(data)
         return
       } else {
-        
+
         if (options[0] == "급식") {
-              school.meal({
-                  ATPT_OFCDC_SC_CODE: 'J10',
-                  SD_SCHUL_CODE: '7531167',
-                  MMEAL_SC_CODE: "2",
-                  MLSV_YMD: options[1]
-                })
-              .then(res => {
-                console.log(options[1], res)
-                  let result = []
-                res[0].DDISH_NM.split("<br/>").forEach(element => {
-                  result.push({
-                      name: element.split("(")[0],
-                      nature: element.split("(")[1]?.split(")")[0]
-                  })
-                })
-                let itemsLIST = []
-                result.forEach(e => {
-                  itemsLIST.push({
-                    "title": e.name.trim(),
-                    "action": "message",
-                    "messageText": e.name.trim()+"이 뭐야?",
-                    "description": e.nature
-                  })
-                })
-                const dateF = formatDate(options[1])
+          school.meal({
+              ATPT_OFCDC_SC_CODE: 'J10',
+              SD_SCHUL_CODE: '7531167',
+              MMEAL_SC_CODE: "2",
+              MLSV_YMD: options[1]
+            })
+            .then(res => {
+              console.log(options[1], res)
+              if (!res[0]) {
                 data = {
                   'version': '2.0',
                   'template': {
                     'outputs': [{
                       "listCard": {
                         "header": {
-                          "title": dateF[1]+"월 "+dateF[2]+"일 ("+dateF[3]+") 중식",
-                          "link": {}
+                          "title": dateF[1] + "월 " + dateF[2] + "일 (" + dateF[3] + ") 중식",
+                          "description": "등록된 급식이 없습니다."
                         },
-                        "items": itemsLIST
-                      }
-                    }],
+                      },
+                      "buttons": [{
+                        "action": "webLink",
+                        "label": "급식 전체 보기",
+                        "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
+                      },]
+                    }, ],
                     'quickReplies': keywords.slice(0, 3).map(keyword => ({
                       'label': keyword,
                       'action': 'message',
@@ -146,40 +134,90 @@ app.post('/message', async (req, resS) => {
                 console.log('data: ' + JSON.stringify(data, null, 4))
                 resS.json(data)
                 return
-              })
-        } else {
-        data = {
-          'version': '2.0',
-          'template': {
-            'outputs': [{
-              "listCard": {
-                "header": {
-                  "title": "아직 구현중인 기능입니다.",
-                  "link": {}
-                },
-                "items": [{
-                  "title": options[0] + " 정보 제공",
-                  "link": {},
-                  "description": ''
-                }]
               }
-            }],
-            'quickReplies': keywords.slice(0, 3).map(keyword => ({
-              'label': keyword,
-              'action': 'message',
-              'messageText': keyword
-            })).concat([{
-              'label': "새 채팅",
-              'action': 'message',
-              'messageText': "새 채팅"
-            }])
+              let result = []
+              res[0].DDISH_NM.split("<br/>").forEach(element => {
+                result.push({
+                  name: element.split("(")[0],
+                  nature: element.split("(")[1]?.split(")")[0]
+                })
+              })
+              let itemsLIST = []
+              result.forEach(e => {
+                itemsLIST.push({
+                  "title": e.name.trim(),
+                  "action": "message",
+                  "messageText": e.name.trim() + "이 뭐야?",
+                  "description": e.nature
+                })
+              })
+              const dateF = formatDate(options[1])
+              data = {
+                'version': '2.0',
+                'template': {
+                  'outputs': [{
+                    "listCard": {
+                      "header": {
+                        "title": dateF[1] + "월 " + dateF[2] + "일 (" + dateF[3] + ") 중식",
+                        "link": {}
+                      },
+                      "items": itemsLIST
+                    },
+                    "buttons": [{
+                      "action": "webLink",
+                      "label": "급식 전체 보기",
+                      "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
+                    },]
+                  }],
+                  'quickReplies': keywords.slice(0, 3).map(keyword => ({
+                    'label': keyword,
+                    'action': 'message',
+                    'messageText': keyword
+                  })).concat([{
+                    'label': "새 채팅",
+                    'action': 'message',
+                    'messageText': "새 채팅"
+                  }])
+                }
+              }
+              console.log(result)
+              console.log('data: ' + JSON.stringify(data, null, 4))
+              resS.json(data)
+              return
+            })
+        } else {
+          data = {
+            'version': '2.0',
+            'template': {
+              'outputs': [{
+                "listCard": {
+                  "header": {
+                    "title": "아직 구현중인 기능입니다.",
+                    "link": {}
+                  },
+                  "items": [{
+                    "title": options[0] + " 정보 제공",
+                    "link": {},
+                    "description": ''
+                  }]
+                }
+              }],
+              'quickReplies': keywords.slice(0, 3).map(keyword => ({
+                'label': keyword,
+                'action': 'message',
+                'messageText': keyword
+              })).concat([{
+                'label': "새 채팅",
+                'action': 'message',
+                'messageText': "새 채팅"
+              }])
+            }
           }
+          console.log('data: ' + JSON.stringify(data, null, 4))
+          resS.json(data)
+          return
         }
-        console.log('data: ' + JSON.stringify(data, null, 4))
-        resS.json(data)
-        return
       }
-    }
     }
   } catch (err) {
     console.error(err)
@@ -264,16 +302,16 @@ async function getMessage({
 
 function formatDate(dateString) {
   const date = new Date(
-      dateString.slice(0, 4),
-      dateString.slice(4, 6) - 1,
-      dateString.slice(6, 8)
+    dateString.slice(0, 4),
+    dateString.slice(4, 6) - 1,
+    dateString.slice(6, 8)
   );
   const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
-  
+
   return [
-      date.getFullYear().toString(),
-      (date.getMonth() + 1).toString(),
-      date.getDate().toString(),
-      dayNames[date.getDay()]
+    date.getFullYear().toString(),
+    (date.getMonth() + 1).toString(),
+    date.getDate().toString(),
+    dayNames[date.getDay()]
   ];
 }
