@@ -38,6 +38,9 @@ app.post('/message', async (req, res) => {
           }]
         }
       }
+      console.log('data: ' + JSON.stringify(data, null, 4))
+      res.json(data)
+      return
 
     } else {
       if (!userDatas[reqData.user.id]) {
@@ -85,6 +88,9 @@ app.post('/message', async (req, res) => {
             }])
           }
         }
+        console.log('data: ' + JSON.stringify(data, null, 4))
+        res.json(data)
+        return
       } else {
         
         if (options[0] == "급식") {
@@ -136,6 +142,9 @@ app.post('/message', async (req, res) => {
                   }
                 }
                 console.log(result)
+                console.log('data: ' + JSON.stringify(data, null, 4))
+                res.json(data)
+                return
               })
         } else {
         data = {
@@ -165,6 +174,9 @@ app.post('/message', async (req, res) => {
             }])
           }
         }
+        console.log('data: ' + JSON.stringify(data, null, 4))
+        res.json(data)
+        return
       }
     }
     }
@@ -193,10 +205,10 @@ app.post('/message', async (req, res) => {
         }
       }
     }
+    console.log('data: ' + JSON.stringify(data, null, 4))
+    res.json(data)
+    return
   }
-
-  console.log('data: ' + JSON.stringify(data, null, 4))
-  res.json(data)
 })
 
 
