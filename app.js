@@ -11,7 +11,7 @@ const axios = require("axios")
 
 let userDatas = {}
 let data = {}
-app.post('/message', async (req, res) => {
+app.post('/message', async (req, resS) => {
   try {
     const reqData = req.body.userRequest
     const question = reqData.utterance
@@ -39,7 +39,7 @@ app.post('/message', async (req, res) => {
         }
       }
       console.log('data: ' + JSON.stringify(data, null, 4))
-      res.json(data)
+      resS.json(data)
       return
 
     } else {
@@ -89,7 +89,7 @@ app.post('/message', async (req, res) => {
           }
         }
         console.log('data: ' + JSON.stringify(data, null, 4))
-        res.json(data)
+        resS.json(data)
         return
       } else {
         
@@ -143,7 +143,7 @@ app.post('/message', async (req, res) => {
                 }
                 console.log(result)
                 console.log('data: ' + JSON.stringify(data, null, 4))
-                res.json(data)
+                resS.json(data)
                 return
               })
         } else {
@@ -175,7 +175,7 @@ app.post('/message', async (req, res) => {
           }
         }
         console.log('data: ' + JSON.stringify(data, null, 4))
-        res.json(data)
+        resS.json(data)
         return
       }
     }
@@ -206,7 +206,7 @@ app.post('/message', async (req, res) => {
       }
     }
     console.log('data: ' + JSON.stringify(data, null, 4))
-    res.json(data)
+    resS.json(data)
     return
   }
 })
