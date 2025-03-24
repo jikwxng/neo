@@ -102,6 +102,7 @@ app.post('/message', async (req, resS) => {
             })
             .then(res => {
               console.log(options[1], res)
+              const dateF = formatDate(options[1])
               if (!res[0]) {
                 data = {
                   'version': '2.0',
@@ -151,7 +152,7 @@ app.post('/message', async (req, resS) => {
                   "description": e.nature
                 })
               })
-              const dateF = formatDate(options[1])
+              
               data = {
                 "version": "2.0",
                 "template": {
