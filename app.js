@@ -122,6 +122,10 @@ app.post('/message', async (req, resS) => {
                               "action": "webLink",
                               "label": "급식 전체 보기",
                               "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
+                            },
+                            {
+                              "action": "share",
+                              "label": "공유"
                             }
                           ]
                         }
@@ -177,6 +181,10 @@ app.post('/message', async (req, resS) => {
                             "action": "webLink",
                             "label": "급식 전체 보기",
                             "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
+                          },
+                          {
+                            "action": "share",
+                            "label": "공유"
                           }
                         ]
                       }
