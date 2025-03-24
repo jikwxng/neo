@@ -115,7 +115,7 @@ app.post('/message', async (req, resS) => {
                           },
                           "items": [{
                             "title": "등록된 급식이 없습니다.",
-                            "description": "공휴일, 개교기념일, 재량 휴업일은\n급식 정보가 제공되지 않습니다."
+                            "description": "공휴일, 개교기념일, 재량 휴업일은 급식 정보가 제공되지 않습니다."
                           }], 
                           "buttons": [
                             {
