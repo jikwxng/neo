@@ -92,7 +92,7 @@ app.post('/message', async (req, res) => {
                   ATPT_OFCDC_SC_CODE: 'J10',
                   SD_SCHUL_CODE: '7531167',
                   MMEAL_SC_CODE: "2",
-                  MLSV_YMD: options[2]
+                  MLSV_YMD: options[1]
                 })
               .then(res => {
                 console.log(options[1], res)
