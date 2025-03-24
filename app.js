@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const school = require('school.hana.js')
 
 app.use(express.urlencoded({
   extended: false
@@ -85,6 +86,56 @@ app.post('/message', async (req, res) => {
           }
         }
       } else {
+        
+        if (options[0] == "급식") {
+              school.meal({
+                  ATPT_OFCDC_SC_CODE: 'J10',
+                  SD_SCHUL_CODE: '7531167',
+                  MMEAL_SC_CODE: "2",
+                  MLSV_YMD: options[2]
+                })
+              .then(res => {
+                  let result = []
+                res[0].DDISH_NM.split("<br/>").forEach(element => {
+                  result.push({
+                      name: element.split("(")[0],
+                      nature: element.split("(")[1]?.split(")")[0]
+                  })
+                })
+                let itemsLIST = []
+                result.forEach(e => {
+                  itemsLIST.push({
+                    "title": e.name,
+                    "link": {},
+                    "description": e.nature
+                  })
+                })
+                data = {
+                  'version': '2.0',
+                  'template': {
+                    'outputs': [{
+                      "listCard": {
+                        "header": {
+                          "title": formatDate(options[1]),
+                          "link": {}
+                        },
+                        "items": itemsLIST
+                      }
+                    }],
+                    'quickReplies': keywords.slice(0, 3).map(keyword => ({
+                      'label': keyword,
+                      'action': 'message',
+                      'messageText': keyword
+                    })).concat([{
+                      'label': "새 채팅",
+                      'action': 'message',
+                      'messageText': "새 채팅"
+                    }])
+                  }
+                }
+                console.log(result)
+              })
+        } else {
         data = {
           'version': '2.0',
           'template': {
@@ -113,6 +164,7 @@ app.post('/message', async (req, res) => {
           }
         }
       }
+    }
     }
   } catch (err) {
     console.error(err)
@@ -193,4 +245,20 @@ async function getMessage({
   } catch (e) {
     console.error(e)
   }
+}
+
+function formatDate(dateString) {
+  const date = new Date(
+      dateString.slice(0, 4),
+      dateString.slice(4, 6) - 1,
+      dateString.slice(6, 8)
+  );
+  const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+  
+  return [
+      date.getFullYear().toString(),
+      (date.getMonth() + 1).toString(),
+      date.getDate().toString(),
+      dayNames[date.getDay()]
+  ];
 }
