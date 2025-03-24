@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "axios": "^1.8.4",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "school.hana.js": "^0.0.1"
   }
 }
