@@ -111,13 +111,14 @@ app.post('/message', async (req, res) => {
                     "description": e.nature
                   })
                 })
+                const dateF = formatDate(options[1])
                 data = {
                   'version': '2.0',
                   'template': {
                     'outputs': [{
                       "listCard": {
                         "header": {
-                          "title": formatDate(options[1]),
+                          "title": dateF[1]+"월 "+dateF[2]+"일 ("+dateF[3]+") 중식",
                           "link": {}
                         },
                         "items": itemsLIST
