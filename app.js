@@ -131,7 +131,6 @@ app.post('/message', async (req, resS) => {
                     }])
                   }
                 }
-                console.log(result)
                 console.log('data: ' + JSON.stringify(data, null, 4))
                 resS.json(data)
                 return
