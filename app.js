@@ -95,6 +95,7 @@ app.post('/message', async (req, res) => {
                   MLSV_YMD: options[2]
                 })
               .then(res => {
+                console.log(options[1], res)
                   let result = []
                 res[0].DDISH_NM.split("<br/>").forEach(element => {
                   result.push({
