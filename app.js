@@ -112,9 +112,9 @@ app.post('/message', async (req, resS) => {
                 let itemsLIST = []
                 result.forEach(e => {
                   itemsLIST.push({
-                    "title": e.name,
+                    "title": e.name.trim(),
                     "action": "message",
-                    "messageText": e.name+"이 뭐야?",
+                    "messageText": e.name.trim()+"이 뭐야?",
                     "description": e.nature
                   })
                 })
