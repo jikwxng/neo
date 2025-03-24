@@ -112,12 +112,12 @@ app.post('/message', async (req, resS) => {
                           "title": dateF[1] + "월 " + dateF[2] + "일 (" + dateF[3] + ") 중식",
                           "description": "등록된 급식이 없습니다."
                         },
+                        "buttons": [{
+                          "action": "webLink",
+                          "label": "급식 전체 보기",
+                          "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
+                        },]
                       },
-                      "buttons": [{
-                        "action": "webLink",
-                        "label": "급식 전체 보기",
-                        "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
-                      },]
                     }, ],
                     'quickReplies': keywords.slice(0, 3).map(keyword => ({
                       'label': keyword,
@@ -153,33 +153,39 @@ app.post('/message', async (req, resS) => {
               })
               const dateF = formatDate(options[1])
               data = {
-                'version': '2.0',
-                'template': {
-                  'outputs': [{
-                    "listCard": {
-                      "header": {
-                        "title": dateF[1] + "월 " + dateF[2] + "일 (" + dateF[3] + ") 중식",
-                        "link": {}
-                      },
-                      "items": itemsLIST
-                    },
-                    "buttons": [{
-                      "action": "webLink",
-                      "label": "급식 전체 보기",
-                      "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
-                    },]
-                  }],
-                  'quickReplies': keywords.slice(0, 3).map(keyword => ({
-                    'label': keyword,
-                    'action': 'message',
-                    'messageText': keyword
-                  })).concat([{
-                    'label': "새 채팅",
-                    'action': 'message',
-                    'messageText': "새 채팅"
-                  }])
+                "version": "2.0",
+                "template": {
+                  "outputs": [
+                    {
+                      "listCard": {
+                        "header": {
+                          "title": dateF[1] + "월 " + dateF[2] + "일 (" + dateF[3] + ") 중식",
+                          "link": {}
+                        },
+                        "items": itemsLIST,
+                        "buttons": [
+                          {
+                            "action": "webLink",
+                            "label": "급식 전체 보기",
+                            "webLinkUrl": "https://syhs-h.goeujb.kr/syhs-h/ad/fm/foodmenu/selectFoodMenuView.do"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "quickReplies": keywords.slice(0, 3).map(keyword => ({
+                    "label": keyword,
+                    "action": "message",
+                    "messageText": keyword
+                  })).concat([
+                    {
+                      "label": "새 채팅",
+                      "action": "message",
+                      "messageText": "새 채팅"
+                    }
+                  ])
                 }
-              }
+              }              
               console.log(result)
               console.log('data: ' + JSON.stringify(data, null, 4))
               resS.json(data)
